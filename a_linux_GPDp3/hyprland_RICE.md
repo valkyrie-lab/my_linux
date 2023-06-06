@@ -3,9 +3,9 @@
 - OS: Archlinux
 
 ## 依赖软件列表
-- waybar-hyprland-git waybar-mpris-git starship 
+- waybar-hyprland-git waybar-mpris-git starship fish (剔出)
 ```
-paru -S hyprland-git  cava  python rustup kitty fish wofi xdg-desktop-portal-hyprland-git tty-clock-git swaylockd swaylock-effects-git swayidle grim slurp jq dunst wl-clipboard cliphist wl-clip-persist swww-git zsh tmux ranger sddm-git qt5-base qt5-wayland qt6-base qt6-wayland light g4music btop
+paru -S hyprland-git  cava  python rustup kitty wofi xdg-desktop-portal-hyprland-git tty-clock-git swaylockd swaylock-effects-git swayidle grim slurp jq dunst wl-clipboard cliphist wl-clip-persist swww-git zsh tmux ranger sddm-git qt5-base qt5-wayland qt6-base qt6-wayland light g4music btop
 ```
 - 重写 hyprland 配置
 hyprctl clients : list of windows message
@@ -281,8 +281,40 @@ bind=,code:123,exec,amixer set Master 1%+
 ````
 
 ## 音量 背光， 进度条
-`wob`
-[GitHub - francma/wob: Wayland 的轻量级叠加卷/背光/进度/任何栏。](https://github.com/francma/wob)
+- wob : [GitHub - francma/wob: Wayland 的轻量级叠加卷/背光/进度/任何栏。](https://github.com/francma/wob)
+    - 创建配置文件
+    ````
+    ~/.config/wob/wob.ini
+    _____________________
+    timeout = 1000
+    max = 100
+    width = 400
+    height = 50
+    border_offset = 4
+    bar_padding = 4
+    bar_color = FFFFFF
+    margin = 0
+    anchor = top center # (top = 1, bottom = 2, left = 4, right = 8 |  top, left, right, bottom, center)
+    overflow_mode = 0 # (wrap = 0, nowrap = 1)
+    output_mode = whitelist # (whitelist = 0, all = 1, focused = 2)
+    #border_color =
+    #
+
+
+    [output.left]
+    name = DP-1
+
+    [output.ips]
+    name = HDMI-1
+
+    [style.muted]
+    background_color = 032cfc
+    ````
+
+- wlsunset [yes] 支持 wlr-gamma-control-unstable-v1 和 xdg-output-unstable-v1 的 Wayland 合成器的日/夜伽玛调整。
+````
+wlsunset -l 39.9 -L 116.3
+````
 
 ## 实用程序
 -- Chat
@@ -290,11 +322,21 @@ bind=,code:123,exec,amixer set Master 1%+
     -- telegram
 
 -- ScreenSort
-    -- peek :       work on xwayland: GDK_BACKEND=x11 peek
     -- flameshot :  Working bad on wayland, No supper multi-monitor display
-    -- kooha
+    -- kooha : 支持wayland的录屏工具
+    -- OBS
 
 -- tailscale-git
 
 -- wev :键盘按键码识别
 
+-- vimiv-qt :利用键盘来预览图像的gui图像预览
+    -- [Getting Started — vimiv documentation](https://karlch.github.io/vimiv-qt/documentation/getting_started.html)
+
+-- waydroid :完整的安卓
+
+-- 
+
+
+## waydroid
+[Waydroid | Android in a Linux container --- 机器人 |Linux 容器中的 Android](https://waydro.id/)
