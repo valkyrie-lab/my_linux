@@ -281,7 +281,7 @@ bind=,code:123,exec,amixer set Master 1%+
 ````
 
 ## 音量 背光， 进度条
-- wob : [GitHub - francma/wob: Wayland 的轻量级叠加卷/背光/进度/任何栏。](https://github.com/francma/wob)
+- wob : [GitHub - francma/wob: Wayland 的轻量级叠加卷/背光/进度/任何栏。](https://github.com/francma/wob) 暂时不采用
     - 创建配置文件
     ````
     ~/.config/wob/wob.ini
@@ -305,11 +305,19 @@ bind=,code:123,exec,amixer set Master 1%+
     name = DP-1
 
     [output.ips]
-    name = HDMI-1
+   name = HDMI-1
 
     [style.muted]
     background_color = 032cfc
     ````
+
+- hyprland env config
+````
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+````
+
+- 采用dunst 显示背光，音量调节的进度条
 
 - wlsunset [yes] 支持 wlr-gamma-control-unstable-v1 和 xdg-output-unstable-v1 的 Wayland 合成器的日/夜伽玛调整。
 ````
@@ -335,7 +343,7 @@ wlsunset -l 39.9 -L 116.3
 
 -- waydroid :完整的安卓
 
--- 
+--
 
 ## waydroid
 [Waydroid | Android in a Linux container --- 机器人 |Linux 容器中的 Android](https://waydro.id/)
