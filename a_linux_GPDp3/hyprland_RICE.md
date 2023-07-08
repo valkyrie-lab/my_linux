@@ -272,18 +272,18 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 ## 音量 背光快捷键控制
 ````
 # Light (未添加通知)
-bind=,code:232,exec,light -U 10
-bind=,code:233,exec,light -A 10
+binde=,code:232,exec,light -U 10
+binde=,code:233,exec,light -A 10
 
-# Audio (未添加通知)
-bind=,code:122,exec,amixer set Master 1%-
-bind=,code:123,exec,amixer set Master 1%+
+# Audio (未添加通知), 使用bindle 可以在锁屏的情况下更改音量
+bindle=,code:122,exec,amixer set Master 1%-
+bindle=,code:123,exec,amixer set Master 1%+
 ````
 
 ## 音量 背光， 进度条
 - wob : [GitHub - francma/wob: Wayland 的轻量级叠加卷/背光/进度/任何栏。](https://github.com/francma/wob) 暂时不采用
     - 创建配置文件
-    ````
+````
     ~/.config/wob/wob.ini
     _____________________
     timeout = 1000
@@ -309,7 +309,7 @@ bind=,code:123,exec,amixer set Master 1%+
 
     [style.muted]
     background_color = 032cfc
-    ````
+````
 
 - hyprland env config
 ````
@@ -324,6 +324,19 @@ exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 wlsunset -l 39.9 -L 116.3
 ````
 
+## 特殊工作区（暂存区）
+````
+# Scratchpad
+## 将当前窗口发送到特殊工作区
+bind = SUPER_ALT,grave,movetoworkspace, special
+## 显示和隐藏特殊工作区
+bind = SUPER,grave,togglespecialworkspace,
+
+### 将特殊工作区的窗口发送到当前屏幕活动的工作区并平铺
+bind = SUPER_ALT, w, movetoworkspace, m+1
+bind = SUPER_ALT, w, togglefloating, window
+
+````
 ## 实用程序
 -- Chat
     -- icalingua++ : QQ

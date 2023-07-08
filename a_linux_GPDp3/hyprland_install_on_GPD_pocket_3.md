@@ -481,7 +481,14 @@ windowrule=float,title:^(fly_is_kitty)$
 windowrule=float,title:^(clock_is_kitty)$
 windowrule=size 418 234,title:^(clock_is_kitty)$
 ````
-
+## bind flags
+````
+l -> locked, aka. works also when an input inhibitor (e.g. a lockscreen) is active.
+r -> release, will trigger on release of a key.
+e -> repeat, will repeat when held.
+n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher.
+m -> mouse, see below
+````
 
 ## Bug
 
