@@ -26,7 +26,7 @@ while true; do
 		done \
 		| sort -n | cut -d':' -f2- \
 		| while read -r img; do
-      swww img "$img" --transition-type grow --transition-pos "$(hyprctl cursorpos)" --transition-duration 3
 			sleep $INTERVAL
+      swww img "$img" --transition-type grow --transition-pos "$(hyprctl cursorpos)" --transition-duration 3
 		done
 done
