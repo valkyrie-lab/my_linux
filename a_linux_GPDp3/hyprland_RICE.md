@@ -346,6 +346,7 @@ bind = SUPER_ALT, w, togglefloating, window
     -- flameshot :  Working bad on wayland, No supper multi-monitor display
     -- kooha : 支持wayland的录屏工具
     -- OBS
+    -- grimblast: 
 
 -- tailscale-git
 
@@ -360,3 +361,9 @@ bind = SUPER_ALT, w, togglefloating, window
 
 ## waydroid
 [Waydroid | Android in a Linux container --- 机器人 |Linux 容器中的 Android](https://waydro.id/)
+
+## TODO
+截屏
+z-shell H-S-MW
+dpms: switch 不好使
+手动dpms
