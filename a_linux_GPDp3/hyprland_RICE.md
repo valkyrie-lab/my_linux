@@ -69,7 +69,7 @@ libinput 不解释手势 触摸屏 所以这个实用程序只能用于触摸板
 ````
 yay -S wvkbd
 
-wvkbd-mobintl
+wvkbd-mobintl -H 1920 -L 300
 ````
 
 hyprland-per-window-layout 支持多键盘布局
@@ -79,16 +79,22 @@ exec-once = hyprland-per-window-layout
 
 ## GPD pocket 3 自动旋转支持
 [iio-hyprland, Listen iio-sensor-proxy and auto change Hyprland output orientation](https://github.com/JeanSchoeller/iio-hyprland/)
--- 开机自动旋转正常支持
--- 不支持触摸旋转
+- 已经支持触控屏幕自动旋转
 ````
 yay -S iio-hyprland-git
 
 # 添加到hyprland config
 exec-once iio-hyprland DSI-1
 ````
-### 脚本实现自动旋转触控以及手写笔和屏幕显示
+--- `/etc/udev/rules.d/99-goodix-touch.rules`
+
+### 不知道是不是我做了什么更改触控和触控笔之间旋转相差了2的数量级，所以对自动旋转脚本做了点更改
 ````
+# 安装
+sudo make install
+
+# 卸载
+sudo make uninstall
 ````
 
 ## Clipboard setting
@@ -234,8 +240,6 @@ __________________________
 --------------------------
     # @ tw 可以选择一个不冲突的键位绑定
 ````
-
-
 
 ## Hight DPI
 ### FireFox DPI 高分辨率下firefox字体和界面自动放大的问题
