@@ -376,3 +376,5 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 ## TODO
 z-shell H-S-MW
+添加prtsc截图当前active screen 屏幕 keybind
+添加触控笔的按钮
