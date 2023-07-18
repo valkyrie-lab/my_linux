@@ -314,7 +314,7 @@ sudo systemctl enable NetworkManager-dispatcher.service
           pipewire-alsa   :取代 ALSA 客户端（如果安装了pulseaudio-alsa ，请移除它）
           pipewire-jac   :jack 客户端启动支持
           pipewire-zeroconf   :pipewire 零配置支持（自动配置）
-          alsa-utuls :提供alsamixer amixer 工具
+          alsa-utils :提供alsamixer amixer 工具
           lib32-libpipewire 1:0.3.70-1
           libpipewire
           pipewire-jack

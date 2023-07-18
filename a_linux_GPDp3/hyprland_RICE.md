@@ -5,7 +5,7 @@
 ## 依赖软件列表
 - waybar-hyprland-git waybar-mpris-git starship fish (剔出)
 ```
-paru -S hyprland-git  cava  python rustup kitty wofi xdg-desktop-portal-hyprland-git tty-clock-git swaylockd swaylock-effects-git swayidle grim slurp jq dunst wl-clipboard cliphist wl-clip-persist swww-git zsh tmux ranger sddm-git qt5-base qt5-wayland qt6-base qt6-wayland light g4music btop
+paru -S hyprland-git  cava  python rustup kitty wofi xdg-desktop-portal-hyprland-git tty-clock-git swaylockd swaylock-effects-git swayidle grim slurp swappy jq dunst wl-clipboard cliphist wl-clip-persist swww-git zsh tmux ranger sddm-git qt5-base qt5-wayland qt6-base qt6-wayland light g4music btop
 ```
 - 重写 hyprland 配置
 hyprctl clients : list of windows message
@@ -109,10 +109,25 @@ exec-once iio-hyprland DSI-1
 ## Screenshot
 - grim: Grab images from a Wayland compositor.
 - slurp: Select a region in a Wayland compositor and print it to the standard output
+- [swappy](https://github.com/jtheoof/swappy): jtheoof/swappy：Wayland原生快照编辑工具，灵感来自macOS上的Snappy
+```` '$HOME/.config/swappy/config'
+[Default]
+save_dir=$HOME/Desktop
+save_filename_format=swappy-%Y%m%d-%H%M%S.png
+show_panel=false
+line_size=5
+text_size=20
+text_font=sans-serif
+paint_mode=brush
+early_exit=false
+fill_shape=false
+````
+
 这两个一起配合实现选区截图并保存到剪切板上
     - keybind:
         ````
         bind=SUPER,i,exec,grim -g "$(slurp)" - | wl-copy
+        bind=SUPER_ALT,i,exec,grim -g "$(slurp)" - | swappy -f -
         ````
 - 配合 `bar` 实现鼠标点击截图功能
 ````
@@ -206,7 +221,7 @@ _________________________________
                 self.fm.notify("The given file does not exist!", bad=True)
                 return
             self.fm.notify("run command: set_wallpaper " + target_filename)
-            self.fm.run('swww img ' + target_filename )
+            self.fm.run('swww img ' + target_filename + ' --transition-type grow --transition-pos "$(hyprctl cursorpos)" --transition-duration 3')
 ---------------------------------------------------------------------------
     # @ self.fm.thisfile.path 获取当前选定的绝对文件路径
     # @ self.fm.notify 在ranger底栏显示一条信息
@@ -239,15 +254,8 @@ __________________________
 - https://github.com/ErikReider/SwayAudioIdleInhibit
 
 ## bar (暂时不需要)
-- time
-- workspace
 
 ## github ssh (Done)
-
-
-## broot (Done)
-- [Install br - Broot --- 安装 br - 布根](https://dystroy.org/broot/install-br/)
-yay -S broot-git
 
 
 ##  不用 DM 启动 hyprland
@@ -258,15 +266,6 @@ if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec Hyprland
   # startx
 fi
-````
-
-## zsh 相关
-- zshenv zshrc zshlogin
-````
-path+=(~/.local/bin;~/.ghcup/bin)
-
-# use bat as man pager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 ````
 
 ## 音量 背光快捷键控制
@@ -362,8 +361,14 @@ bind = SUPER_ALT, w, togglefloating, window
 ## waydroid
 [Waydroid | Android in a Linux container --- 机器人 |Linux 容器中的 Android](https://waydro.id/)
 
+## zsh 相关
+- zshenv zshrc zshlogin
+````
+path+=(~/.local/bin;~/.ghcup/bin)
+
+# use bat as man pager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+````
+
 ## TODO
-截屏
 z-shell H-S-MW
-dpms: switch 不好使
-手动dpms
