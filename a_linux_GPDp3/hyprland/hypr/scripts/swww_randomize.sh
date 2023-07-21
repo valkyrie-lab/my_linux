@@ -27,6 +27,16 @@ while true; do
 		| sort -n | cut -d':' -f2- \
 		| while read -r img; do
 			sleep $INTERVAL
-      swww img "$img" --transition-type grow --transition-pos "$(hyprctl cursorpos)" --transition-duration 3
+
+      swww img "$img" --transition-fps 60 \
+                      --transition-step 250 \
+                      --transition-bezier .25,1,1.12,.4 \
+                      --transition-type grow \
+                      --transition-pos "$(hyprctl cursorpos)" \
+                      --transition-duration 2
 		done
 done
+                      #--transition-bezier .43,1.19,1,.4 \
+                      #--transition-bezier .42,0,.58,1 \
+                      #--transition-angle \  ## wipe和wave用于控制擦除的角度
+                      #--transition-type grow \
