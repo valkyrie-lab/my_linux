@@ -13,8 +13,6 @@ if [[ $# -lt 1 ]] || [[ ! -d $1   ]]; then
 fi
 
 # Edit bellow to control the images transition
-#export SWWW_TRANSITION_FPS=60
-#export SWWW_TRANSITION_STEP=2
 
 # This controls (in seconds) when to switch to the next image
 INTERVAL=300
@@ -30,13 +28,26 @@ while true; do
 
       swww img "$img" --transition-fps 60 \
                       --transition-step 250 \
-                      --transition-bezier .25,1,1.12,.4 \
+                      --transition-bezier 1,0.95,.94,-0.5 \
                       --transition-type grow \
                       --transition-pos "$(hyprctl cursorpos)" \
-                      --transition-duration 2
+                      --transition-duration 4
 		done
 done
+
+## 立方贝塞尔
+#(1,1,0,0) # 缓进快出
+#(.97,.26,.0,.1)
+#(.78,.78,0.5,0.1) # 平缓过度
+#(1,0.95,.94,-0.5) # 弹弓效果
+#(0,1.16,1,-0.29)
+
+# 快-> 慢 暂留
+#(https://cubic-bezier.com/#.14,.9,.79,.11)
+
+                      #--transition-bezier .01,.85,1.3,.1 \ duration 1
+                      #--transition-bezier .1,.85,1.3,.1 \1
+                      #--transition-bezier .1,1,.1,.1 \1
                       #--transition-bezier .43,1.19,1,.4 \
-                      #--transition-bezier .42,0,.58,1 \
                       #--transition-angle \  ## wipe和wave用于控制擦除的角度
                       #--transition-type grow \
