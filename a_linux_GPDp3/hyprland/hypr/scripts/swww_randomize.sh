@@ -16,6 +16,7 @@ fi
 
 # This controls (in seconds) when to switch to the next image
 INTERVAL=300
+INTERVAL_a=1
 
 while true; do
 	find "$1" \
@@ -26,12 +27,36 @@ while true; do
 		| while read -r img; do
 			sleep $INTERVAL
 
-      swww img "$img" --transition-fps 60 \
+      COR=$(printf "%02x" $(($RANDOM % 156 + 100)))
+      COG=$(printf "%02x" $(($RANDOM % 156 + 100)))
+      COB=$(printf "%02x" $(($RANDOM % 156 + 100)))
+      ## 清除
+      swww clear $COR$COG$COB
+
+			#sleep $INTERVAL_a
+
+## Monitors 
+#MONITOR_COUNT=$(hyprctl monitors -j | jq '. | length')  ## 计数
+#for ((i=0; i<MONITOR_COUNT;i++)) do
+  #MONITOR=$(hyprctl monitors -j | jq -r '.[$i].name')  ## 名称
+      #swww img "$img" --outputs $MONITOR \
+      #swww img "$img" --outputs DSI-1 \
+      swww img "$img" \
+                      --transition-fps 60 \
                       --transition-step 250 \
-                      --transition-bezier 1,0.95,.94,-0.5 \
-                      --transition-type grow \
-                      --transition-pos "$(hyprctl cursorpos)" \
+                      --transition-bezier 1,1,0,0 \
+                      --transition-type any \
                       --transition-duration 4
+                      #--transition-pos any \
+                      #--transition-pos "$(hyprctl cursorpos)" \
+
+     # swww img "$img" --outputs HDMI-A-1 \
+     #                 --transition-fps 60 \
+     #                 --transition-step 250 \
+     #                 --transition-bezier 1,1,0,0 \
+     #                 --transition-type any \
+     #                 --transition-duration 4
+        #done
 		done
 done
 
