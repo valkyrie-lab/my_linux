@@ -39,40 +39,29 @@ while true; do
 #MONITOR_COUNT=$(hyprctl monitors -j | jq '. | length')  ## 计数
 #for ((i=0; i<MONITOR_COUNT;i++)) do
   #MONITOR=$(hyprctl monitors -j | jq -r '.[$i].name')  ## 名称
-      #swww img "$img" --outputs $MONITOR \
       #swww img "$img" --outputs DSI-1 \
+      #swww img "$img" --outputs $MONITOR \
       swww img "$img" \
                       --transition-fps 60 \
                       --transition-step 250 \
-                      --transition-bezier 1,1,0,0 \
+                      --transition-bezier .1,1,.1,.4 \
                       --transition-type any \
                       --transition-duration 4
                       #--transition-pos any \
                       #--transition-pos "$(hyprctl cursorpos)" \
 
-     # swww img "$img" --outputs HDMI-A-1 \
+     # swww img "$img" --outputs $MONITOR \
      #                 --transition-fps 60 \
      #                 --transition-step 250 \
-     #                 --transition-bezier 1,1,0,0 \
+     #                 --transition-bezier .1,1,.1,.4 \
      #                 --transition-type any \
      #                 --transition-duration 4
         #done
 		done
 done
 
-## 立方贝塞尔
-#(1,1,0,0) # 缓进快出
-#(.97,.26,.0,.1)
-#(.78,.78,0.5,0.1) # 平缓过度
-#(1,0.95,.94,-0.5) # 弹弓效果
-#(0,1.16,1,-0.29)
+#(https://cubic-bezier.com/#.1,.9,.79,.11)
 
-# 快-> 慢 暂留
-#(https://cubic-bezier.com/#.14,.9,.79,.11)
-
-                      #--transition-bezier .01,.85,1.3,.1 \ duration 1
-                      #--transition-bezier .1,.85,1.3,.1 \1
-                      #--transition-bezier .1,1,.1,.1 \1
-                      #--transition-bezier .43,1.19,1,.4 \
+                      #--transition-bezier .1,1,.1,.1 \ 快速的切换效果不错
                       #--transition-angle \  ## wipe和wave用于控制擦除的角度
                       #--transition-type grow \
