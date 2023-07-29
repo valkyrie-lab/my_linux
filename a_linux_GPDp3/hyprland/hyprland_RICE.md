@@ -53,6 +53,15 @@ device:gxtp7380:00-27c6:0113 { ## touch screen
     output=DSI-1
   }
 ````
+
+- [lisgd](https://git.sr.ht/~mil/lisgd)
+Lisgd（libinput 合成手势守护进程）允许您基于 libinput 触摸事件绑定手势以运行要执行的特定命令。
+例如，用一根手指从左向右拖动可以执行特定命令，例如启动终端。
+定向 L-R、R-L、U-D 和 D-U 手势以及诊断 LD-RU、RD-LU、UR-DL、UL-DR 手势支持 1 到 N 个手指。
+
+
+
+
 ### 锁屏禁止触屏,仅通过键盘按键点亮屏幕
  ````
  misc {
@@ -382,3 +391,8 @@ z-shell H-S-MW
 添加触控笔的按钮
 
 swww 更换壁纸方案2
+
+
+
+## btrfs err input/output
+- btrfs check --repair 暂时修复
