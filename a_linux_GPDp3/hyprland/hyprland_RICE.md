@@ -54,10 +54,63 @@ device:gxtp7380:00-27c6:0113 { ## touch screen
   }
 ````
 
-- [lisgd](https://git.sr.ht/~mil/lisgd)
+###[lisgd](https://git.sr.ht/~mil/lisgd)
+
+- 有一个问题：触控没有旋转过来
+
+-- lisgd -d /dev/input/event13 -g "1,RL,*,*,R,notify-send next worksapce && hyprctl dispatch movetoworkspace +1 " 右往左滑动下一个工作区
+
+-- 
+
+
 Lisgd（libinput 合成手势守护进程）允许您基于 libinput 触摸事件绑定手势以运行要执行的特定命令。
 例如，用一根手指从左向右拖动可以执行特定命令，例如启动终端。
 定向 L-R、R-L、U-D 和 D-U 手势以及诊断 LD-RU、RD-LU、UR-DL、UL-DR 手势支持 1 到 N 个手指。
+- 配置文件,可以通过两种方式进行配置：
+1.复制示例配置文件
+2. 创建配置文件使用flags的形式配置
+
+- 基于命令行的运行方式
+···
+
+    -d [devicenodepath]: Defines the dev filesystem device to monitor
+
+
+    -d : [TR] top to right,
+    -d [设备节点路径]：定义要监视的开发文件系统设备
+        Example: lisgd -d /dev/input/input1 例： lisgd -d /dev/input/input1
+    -g [nfingers,gesture,edge,distance,actmode,command]: Allows you to bind a gesture wherein nfingers is an integer, gesture is one of {LR,RL,DU,UD,DLUR,URDL,ULDR,DLUR}, edge is one of * (any), N (none), L (left), R (right), T (top), B (bottom), TL (top left), TR (top right), BL (bottom left), BR (bottom right) and distance is one of * (any), S (short), M (medium), L (large). actmode is R (release) for normal mode and P (pressed) for pressed mode (but this field may be omitted entirely for backward compatibility), command is the shell command to be executed. The -g option can be used multiple times to bind multiple gestures.
+    -g [nfingers，gesture，edge，distance，actmode，command]：允许您绑定手势，其中nfingers是一个整数，手势是{LR，RL，DU，UD，DLUR，URDL，ULDR，DLUR}之一，边缘是*（任意），N（无），L（左），R（右），T（上），B（下），TL（左上），TR（右上），BL（左下），BR（右下），距离是*（任意）之一， S（短），M（中），L（大）。actmode 是正常模式的 R（释放），按下模式是 P（按下）（但为了向后兼容，可以完全省略此字段），命令是要执行的 shell 命令。-g 选项可以多次用于绑定多个手势。
+        Single Gesture Example: lisgd -g "1,LR,*,*,R,notify-send swiped lr"
+        单手势示例： lisgd -g "1,LR,*,*,R,notify-send swiped lr"
+        Multiple Gestures Example: lisgd -g "1,LR,*,*,R,notify-send swiped lr" -g "1,RL,R,*,R,notify-send swiped rl from right edge"
+        多个手势示例： lisgd -g "1,LR,*,*,R,notify-send swiped lr" -g "1,RL,R,*,R,notify-send swiped rl from right edge"
+    -m [timeoutms]: Number of milliseconds gestures must be performed within to be registered. After the timeoutms value; the gesture won't be registered.
+    -m [超时]：必须在内执行毫秒数手势才能注册。超时值之后;不会注册该手势。
+        Example: lisgd -m 1200 例： lisgd -m 1200
+    -o [orientation]: Number of 90-degree rotations to translate gestures by. Can be set to 0-3. For example using 1; a L-R gesture would become a U-D gesture. Meant to be used for screen-rotation.
+    -o [方向]：用于平移手势的 90 度旋转次数。可以设置为 0-3。例如，使用 1;L-R 手势将变为 U-D 手势。用于屏幕旋转。
+        Example lisgd -o 1 例 lisgd -o 1
+    -r [degrees]: Number of degrees offset each 45-degree interval may still be recognized within. Maximum value is 45. Default value is 15. E.g. U-D is a 180 degree gesture but with 15 degrees of leniency will be recognized between 165-195 degrees.
+    -r [度]：每个 45 度间隔的偏移度数仍可在其中识别。最大值为 45。默认值为 15。例如，U-D 是 180 度的手势，但 15 度宽大处理将在 165-195 度之间被识别。
+        Example: lisgd -r 20 例： lisgd -r 20
+    -t [threshold_units]: Threshold in libinput units (pixels) after which a gesture registers. Defaults to 125.
+    -t [threshold_units]：以 libinput 单位（像素）为单位的阈值，手势在此之后注册。默认值为 125。
+        Example: lisgd -t 125 例： lisgd -t 125
+    -T [threshold_units]: Threshold in libinput units (pixels) after which a gesture registers for 'pressed' gestures where fingers are not lifted. Defaults to 60.
+    -T [threshold_units]：以 libinput 单位（像素）为单位的阈值，之后手势将注册手指未抬起的“按下”手势。默认值为 60。
+        Example: lisgd -t 60 例： lisgd -t 60
+    -w [screenwidth]: Width of screen used for edge-based gestures. Use in conjunction with -h. If unset dynamic X/Wayland screen geometry detection is used.
+    -w [屏幕宽度]：用于基于边缘的手势的屏幕宽度。与 -h 结合使用。如果使用未设置的动态X/Wayland屏幕几何检测。
+        Example: lisgd -w 600 例： lisgd -w 600
+    -h [screenheight]: Height of screen used for edge-based gestures. Use in conjunction with -w. If unset dynamic X/Wayland screen geometry detection is used.
+    -h [屏幕高度]：用于基于边缘的手势的屏幕高度。与 -w 结合使用。如果使用未设置的动态X/Wayland屏幕几何检测。
+        Example: lisgd -h 500 例： lisgd -h 500
+    -v: Verbose mode, useful for debugging
+    -v：详细模式，对调试很有用
+        Example: lisgd -v 例： lisgd -v
+
+···
 
 
 
